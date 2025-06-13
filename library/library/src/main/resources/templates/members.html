@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Library Members</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 40px;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .add-button {
+            display: block;
+            width: 150px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px 20px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .active {
+            color: green;
+            font-weight: bold;
+        }
+        .inactive {
+            color: red;
+            font-weight: bold;
+        }
+        .action-btn {
+            padding: 5px 10px;
+            text-decoration: none;
+            color: white;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .edit-btn {
+            background-color: #ffc107;
+        }
+        .delete-btn {
+            background-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Library Members</h1>
+
+<a href="/members/add" class="add-button">Add Member</a>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Join Date</th>
+        <th>Issued Books</th>
+        <th>Active</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="member : ${members}">
+        <td th:text="${member.id}"></td>
+        <td th:text="${member.name}"></td>
+        <td th:text="${member.joinDate}"></td>
+        <td th:text="${member.issuedBooks}"></td>
+        <td>
+            <span th:if="${member.active}" class="active">Active</span>
+            <span th:unless="${member.active}" class="inactive">Inactive</span>
+        </td>
+        <td>
+            <a th:href="@{'/members/edit/' + ${member.id}}" class="action-btn edit-btn">Edit</a>
+            <a th:href="@{'/members/delete/' + ${member.id}}" class="action-btn delete-btn" 
+               onclick="return confirm('Are you sure you want to delete this member?');">Delete</a>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Member Details</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 40px;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            width: 50%;
+            margin: 40px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        p {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        span {
+            font-weight: bold;
+            color: #555;
+        }
+        .active {
+            color: green;
+            font-weight: bold;
+        }
+        .inactive {
+            color: red;
+            font-weight: bold;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Member Details</h1>
+
+<div class="container" th:if="${member != null}">
+    <p>ID: <span th:text="${member.id}"></span></p>
+    <p>Name: <span th:text="${member.name}"></span></p>
+    <p>Join Date: <span th:text="${member.joinDate}"></span></p>
+    <p>Issued Books: <span th:text="${member.issuedBooks}"></span></p>
+    <p>Active: 
+        <span th:if="${member.active}" class="active">Active</span>
+        <span th:unless="${member.active}" class="inactive">Inactive</span>
+    </p>
+</div>
+
+<div style="text-align: center;">
+    <a href="/members">← Back to Members List</a>
+</div>
+
+</body>
+</html>
